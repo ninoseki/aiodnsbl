@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "Async DNSBL lists checker"
 authors = ["Manabu Niseki <manabu.niseki@gmail.com>"]
 license = "MIT"
+homepage = "https://github.com/ninoseki/aiodnsbl"
+repository = "https://github.com/ninoseki/aiodnsbl"
+readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.7"

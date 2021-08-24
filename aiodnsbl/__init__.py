@@ -1,6 +1,3 @@
-"""
-.. include:: ../README.md
-"""
 import poetry_version
 
 from .checker import DNSBLChecker
