@@ -1,5 +1,9 @@
 # aiodnsbl
 
+[![PyPI version](https://badge.fury.io/py/aiodnsbl.svg)](https://badge.fury.io/py/aiodnsbl)
+[![Python CI](https://github.com/ninoseki/aiodnsbl/actions/workflows/test.yml/badge.svg)](https://github.com/ninoseki/aiodnsbl/actions/workflows/test.yml)
+[![Coverage Status](https://coveralls.io/repos/github/ninoseki/aiodnsbl/badge.svg?branch=main)](https://coveralls.io/github/ninoseki/aiodnsbl?branch=main)
+
 [DNSBL](https://en.wikipedia.org/wiki/DNSBL) lists checker based on [aiodns](https://github.com/saghul/aiodns). Checks if an IP or a domain is listed on anti-spam DNS blacklists.
 
 ## Notes
