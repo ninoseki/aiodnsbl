@@ -1,1 +1,48 @@
 # aiodnsbl
+
+[DNSBL](https://en.wikipedia.org/wiki/DNSBL) lists checker based on [aiodns](https://github.com/saghul/aiodns). Checks if an IP or a domain is listed in anti-spam DNS blacklists.
+
+## Note
+
+This is a fork of [pydnsbl](https://github.com/dmippolitov/pydnsbl).
+
+Key differences:
+
+- Fully type annotated
+- No sync wrapper (async only)
+- No category classification
+
+## Installation
+
+```bash
+pip install aiodnsbl
+```
+
+## Usage
+
+```python
+import asyncio
+
+from aiodnsbl import DNSBLChecker
+
+
+loop = asyncio.get_event_loop()
+
+checker = DNSBLChecker()
+
+# Check IP
+loop.run_until_complete(checker.check("8.8.8.8"))
+# <DNSBLResult: 8.8.8.8  (0/10)>
+loop.run_until_complete(checker.check("68.128.212.240"))
+# <DNSBLResult: 68.128.212.240 [BLACKLISTED] (4/10)>
+
+# Check domain
+loop.run_until_complete(checker.check("example.com"))
+# <DNSBLResult: example.com  (0/4)>
+
+# Bulk check
+loop.run_until_complete(
+    checker.bulk_check(["example.com", "8.8.8.8", "68.128.212.240"])
+)
+# [<DNSBLResult: example.com  (0/4)>, <DNSBLResult: 8.8.8.8  (0/10)>, <DNSBLResult: 68.128.212.240 [BLACKLISTED] (4/10)>]
+```
