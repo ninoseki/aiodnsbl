@@ -1,8 +1,8 @@
 # aiodnsbl
 
-[DNSBL](https://en.wikipedia.org/wiki/DNSBL) lists checker based on [aiodns](https://github.com/saghul/aiodns). Checks if an IP or a domain is listed in anti-spam DNS blacklists.
+[DNSBL](https://en.wikipedia.org/wiki/DNSBL) lists checker based on [aiodns](https://github.com/saghul/aiodns). Checks if an IP or a domain is listed on anti-spam DNS blacklists.
 
-## Note
+## Notes
 
 This is a fork of [pydnsbl](https://github.com/dmippolitov/pydnsbl).
 
@@ -45,4 +45,27 @@ loop.run_until_complete(
     checker.bulk_check(["example.com", "8.8.8.8", "68.128.212.240"])
 )
 # [<DNSBLResult: example.com  (0/4)>, <DNSBLResult: 8.8.8.8  (0/10)>, <DNSBLResult: 68.128.212.240 [BLACKLISTED] (4/10)>]
+```
+
+```python
+import asyncio
+
+from aiodnsbl import DNSBLChecker
+
+
+async def main():
+    checker = DNSBLChecker()
+    res = await checker.check("68.128.212.240")
+    print(res)
+    # <DNSBLResult: 68.128.212.240 [BLACKLISTED] (4/10)>
+    print(res.blacklisted)
+    # True
+    print([provider.host for provider in res.providers])
+    # ['b.barracudacentral.org', 'bl.spamcop.net', 'dnsbl.sorbs.net', 'ips.backscatterer.org', ...]
+    print([provider.host for provider in res.detected_by])
+    # ['b.barracudacentral.org', 'dnsbl.sorbs.net', 'spam.dnsbl.sorbs.net', 'zen.spamhaus.org']
+
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
 ```
