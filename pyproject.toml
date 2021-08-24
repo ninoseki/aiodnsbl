@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "aiodnsbl"
 version = "0.1.0"
-description = ""
+description = "Async DNSBL lists checker"
 authors = ["Manabu Niseki <manabu.niseki@gmail.com>"]
 license = "MIT"
 
