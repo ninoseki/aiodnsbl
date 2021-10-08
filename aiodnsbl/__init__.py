@@ -1,7 +1,10 @@
-import poetry_version
-
 from .checker import DNSBLChecker
 
-__version__ = str(poetry_version.extract(source_file=__file__))
+try:
+    import importlib.metadata as importlib_metadata
+except ModuleNotFoundError:
+    import importlib_metadata
+
+__version__ = importlib_metadata.version(__name__)
 
 __all__ = ["DNSBLChecker"]
