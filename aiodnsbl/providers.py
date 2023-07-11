@@ -10,7 +10,6 @@ class Provider:
 
 _BASE_PROVIDERS = [
     "b.barracudacentral.org",
-    "bl.spamcop.net",
     "dnsbl.sorbs.net",
     "ips.backscatterer.org",
     "psbl.surriel.com",
