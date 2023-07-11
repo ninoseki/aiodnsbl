@@ -29,10 +29,8 @@ def normalize_domain(value: str) -> str:
     return idna.encode(value).decode()
 
 
-# regex taken from https://regexr.com/3abjr
-DOMAIN_REGEX = re.compile(
-    r"^((?!-))(xn--)?[a-z0-9][a-z0-9-_]{0,61}[a-z0-9]{0,1}\.(xn--)?([a-z0-9\-]{1,61}|[a-z0-9-]{1,30}\.[a-z]{2,})$"
-)
+# https://regex101.com/r/vdrgm7/1
+DOMAIN_REGEX = re.compile(r"^(((?!-))(xn--|_{1,1})?[a-z0-9-]{0,61}[a-z0-9]{1,1}\.)*(xn--[a-z0-9][a-z0-9\-]{0,60}|[a-z0-9-]{1,30}\.[a-z]{2,})$")
 
 
 @functools.lru_cache(maxsize=256)
