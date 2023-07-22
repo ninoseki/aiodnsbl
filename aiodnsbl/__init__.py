@@ -1,10 +1,5 @@
-from .checker import DNSBLChecker
+import importlib.metadata as importlib_metadata
 
-try:
-    import importlib.metadata as importlib_metadata
-except ModuleNotFoundError:
-    import importlib_metadata
+from .checker import DNSBLChecker  # noqa: F401
 
 __version__ = importlib_metadata.version(__name__)
-
-__all__ = ["DNSBLChecker"]

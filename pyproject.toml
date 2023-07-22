@@ -9,28 +9,43 @@ repository = "https://github.com/ninoseki/aiodnsbl"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8.1"
 aiodns = "^3.0.0"
-idna = "^3.2"
-importlib-metadata = {version = "^4.8.1", python = "<3.8"}
+idna = "^3.4"
 
-[tool.poetry.dev-dependencies]
-autoflake = "^1.4"
-autopep8 = "^1.5.7"
-black = "^21.9b0"
-coveralls = "^3.2.0"
-flake8 = "^3.9.2"
-isort = "^5.9.3"
-mypy = "^0.910"
-pre-commit = "^2.15.0"
-pytest = "^6.2.5"
-pytest-cov = "^3.0.0"
-pytest-mock = "^3.6.1"
-pytest-randomly = "^3.10.1"
-pytest-sugar = "^0.9.4"
-pyupgrade = "^2.29.0"
-pytest-asyncio = "^0.15.1"
+[tool.poetry.group.dev.dependencies]
+autoflake = "^2.2"
+autopep8 = "^2.0"
+black = "^23.7"
+coveralls = "^3.3"
+flake8 = "^6.0"
+isort = "^5.12"
+mypy = "^1.4"
+pre-commit = "^3.3"
+pytest = "^7.2"
+pytest-asyncio = "^0.21"
+pytest-cov = "^4.0"
+pytest-randomly = "^3.13"
+pyupgrade = "^3.9"
+six = "^1.16.0"
+urllib3 = "^1.0"
+
+[tool.poetry-dynamic-versioning]
+enable = true
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core", "poetry-dynamic-versioning"]
+build-backend = "poetry_dynamic_versioning.backend"
+
+[tool.ruff]
+select = [
+  "E",   # pycodestyle errors
+  "W",   # pycodestyle warnings
+  "F",   # pyflakes
+  "C",   # flake8-comprehensions
+  "B",   # flake8-bugbear
+  "T20", # flake8-print
+]
+ignore = [
+  "E501", # line too long, handled by black
+]
