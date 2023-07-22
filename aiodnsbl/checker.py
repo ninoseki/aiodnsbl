@@ -25,7 +25,6 @@ def is_ip_address(value: str) -> bool:
 @functools.lru_cache(maxsize=256)
 def normalize_domain(value: str) -> str:
     value = value.lower()
-
     return idna.encode(value).decode()
 
 
@@ -134,10 +133,9 @@ class BaseDNSBLChecker(abc.ABC):
             if provider.support_type == request_type:
                 selected_providers.append(provider)
 
-        tasks = []
-        for provider in selected_providers:
-            tasks.append(self.dnsbl_request(request, provider))
-
+        tasks = [
+            self.dnsbl_request(request, provider) for provider in selected_providers
+        ]
         responses = await asyncio.gather(*tasks)
         return DNSBLResult(address=request, responses=responses)
 
@@ -145,10 +143,7 @@ class BaseDNSBLChecker(abc.ABC):
         return await self.check_async(request)
 
     async def bulk_check(self, requests: List[str]) -> List[DNSBLResult]:
-        tasks = []
-        for request in requests:
-            tasks.append(self.check_async(request))
-
+        tasks = [self.check_async(request) for request in requests]
         return await asyncio.gather(*tasks)
 
 
