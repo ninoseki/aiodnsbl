@@ -30,7 +30,9 @@ def normalize_domain(value: str) -> str:
 
 
 # https://regex101.com/r/vdrgm7/1
-DOMAIN_REGEX = re.compile(r"^(((?!-))(xn--|_{1,1})?[a-z0-9-]{0,61}[a-z0-9]{1,1}\.)*(xn--[a-z0-9][a-z0-9\-]{0,60}|[a-z0-9-]{1,30}\.[a-z]{2,})$")
+DOMAIN_REGEX = re.compile(
+    r"^(((?!-))(xn--|_{1,1})?[a-z0-9-]{0,61}[a-z0-9]{1,1}\.)*(xn--[a-z0-9][a-z0-9\-]{0,60}|[a-z0-9-]{1,30}\.[a-z]{2,})$"
+)
 
 
 @functools.lru_cache(maxsize=256)
@@ -161,7 +163,7 @@ class DNSBLChecker(BaseDNSBLChecker):
             if address.version == 6:
                 # according to RFC: https://tools.ietf.org/html/rfc5782#section-2.4
                 request_stripped = request.replace(":", "")
-                return ".".join(reversed([x for x in request_stripped]))
+                return ".".join(reversed(list(request_stripped)))
 
             raise ValueError("Unknown ip version")
 
